@@ -100,7 +100,7 @@ export default function LandingPage() {
             <section className="w-full py-16 px-4">
                 <h1 className="border-none text-center font-bold">Sessions</h1>
                 <p className="font-medium text-center text-slate-800">You can start by choosing one of the following this sections</p>
-                <div className="grid grid-cols-1 gap-4 mt-4">
+                <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3">
                     {
                         [
                             {
@@ -120,9 +120,9 @@ export default function LandingPage() {
                             },
                         ].map((item,i) => (
                             <Link key={ i } to={ item.to }>
-                                <button className="rounded-lg bg-white shadow-lg flex flex-col p-4 gap-2 border border-gray-300 text-left">
+                                <button className="rounded-lg bg-white shadow-lg flex flex-col p-4 gap-2 border border-gray-300 text-left md:h-full">
                                     <p className="text-xl text-primary-800 font-semibold">{ item.title }</p>
-                                    <p className="text-gray-600">{ item.caption }</p>
+                                    <p className="text-gray-600 md:flex-grow">{ item.caption }</p>
                                     <span className="w-10 h-10 rounded-full bg-primary-800 text-white flex-center self-end">
                                         <i className="bi bi-chevron-right"></i>
                                     </span>
