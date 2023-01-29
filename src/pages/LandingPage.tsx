@@ -1,5 +1,6 @@
 import EFForTSLogo from "../assets/logo/EFForTS.png";
 import DFGLogo from "../assets/logo/DFG.png";
+import ObjectiveCheckbox from "@/components/ObjectiveCheckbox";
 
 export default function LandingPage() {
 	return (
@@ -47,7 +48,7 @@ export default function LandingPage() {
 			</section>
 
             {/* Content */}
-            <section className="w-full flex flex-col px-8 mt-8 gap-4">
+            <section className="w-full flex flex-col px-6 mt-8 gap-4">
                 <h1><span className="block text-zinc-600 text-lg">Introduction:</span>Sustainable Oil Palm Management</h1>
                 {/* TODO: Bold */}
                 <p>Do you know how oil palm plantations are managed and in how far that is sustainable? With the help of this module, you will discover the topic of sustainable oil palm plantation management with a focus on weeding and fertilisation strategies in three sessions.</p>
@@ -62,6 +63,36 @@ export default function LandingPage() {
                 <p>Enjoy working with this module and have fun making it your own experience with oil palm management.</p>
                 <p>Terima kasih.</p>
                 <p>The authors of this booklet are open for questions or feedback at any time. Contact: <a href="mailto:jacqueline.dischereit@uni-goettingen.de" className="text-sky-500 underline">Jacqueline Dischereit</a> & <a href="mailto:finn-matthiesen@uni-goettingen.de" className="text-sky-500 underline">Finn Matthiesen</a>.</p>
+            </section>
+
+            {/* Overall Learning Objectives */}
+            <section className="bg-primary-800 py-8 mt-8 text-white">
+                <div className="w-full flex flex-col px-6 gap-4">
+                    <h1 className="text-white text-center">Overall Learning Objective</h1>
+                    <p className="text-center text-lg"><em>The guiding question of the unit is: In which way can weeding and fertilising contribute to sustainable oil palm management?</em></p>
+                    <p>Below, you find an overview of what you will be able to do by the end of this unit. Tick the boxes on the right, if you feel you have accomplished the learning objective. There will also be specific learning objectives at the beginning of each session.</p>
+                    <div className="">
+                        <p className="text-lg font-semibold">Overall Learning Objectives</p>
+                        <p className="font-medium">By the end of this unit, you will be able to…</p>
+                        <div className="flex flex-col mt-4 gap-2">
+                            <ObjectiveCheckbox>
+                            Identify environmental and socioeconomic impacts of different oil palm management strategies (different fertilising and weeding strategies) and describe corresponding advantages and disadvantages.
+                            </ObjectiveCheckbox>
+                            <ObjectiveCheckbox>
+                            Design a simplified overview (a network of relationships) of oil palm management practices, focussing mainly on soil fertility and biodiversity (understory plants and soil animals).
+                            </ObjectiveCheckbox>
+                            <ObjectiveCheckbox>
+                            Explain the experimental design of the Oil Palm Management Experiment (OPMX) and critically analyse as well as discuss OPMX data and results.
+                            </ObjectiveCheckbox>
+                            <ObjectiveCheckbox>
+                            Discuss in which way weeding and fertilisation strategies can contribute to sustainable oil palm management.
+                            </ObjectiveCheckbox>
+                            <ObjectiveCheckbox>
+                            Summarize and visualise your gained knowledge in form of an infographic.
+                            </ObjectiveCheckbox>
+                        </div>
+                    </div>
+                </div>
             </section>
 		</div>
 	);

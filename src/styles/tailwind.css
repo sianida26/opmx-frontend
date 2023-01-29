@@ -10,4 +10,14 @@
     h1{
         @apply text-primary-800 block border-b-4 border-primary-800 font-semibold text-2xl
     }
+
+    h1.text-white{
+        @apply border-white
+    }
+}
+
+@layer utilities{
+    flex-center{
+        @apply flex items-center justify-center
+    }
 }
