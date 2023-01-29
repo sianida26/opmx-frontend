@@ -132,6 +132,9 @@ export default function LandingPage() {
                     }
                 </div>
             </section>
+            <footer className="w-full bg-primary-800 py-4">
+
+            </footer>
 		</div>
 	);
 }
