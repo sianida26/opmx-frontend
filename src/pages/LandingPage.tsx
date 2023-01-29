@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import EFForTSLogo from "../assets/logo/EFForTS.png";
 import DFGLogo from "../assets/logo/DFG.png";
 import ObjectiveCheckbox from "@/components/ObjectiveCheckbox";
@@ -48,7 +49,7 @@ export default function LandingPage() {
 			</section>
 
             {/* Content */}
-            <section className="w-full flex flex-col px-6 mt-8 gap-4">
+            <section className="w-full flex flex-col px-6 mt-8 gap-4 text-slate-800">
                 <h1><span className="block text-zinc-600 text-lg">Introduction:</span>Sustainable Oil Palm Management</h1>
                 {/* TODO: Bold */}
                 <p>Do you know how oil palm plantations are managed and in how far that is sustainable? With the help of this module, you will discover the topic of sustainable oil palm plantation management with a focus on weeding and fertilisation strategies in three sessions.</p>
@@ -65,10 +66,10 @@ export default function LandingPage() {
                 <p>The authors of this booklet are open for questions or feedback at any time. Contact: <a href="mailto:jacqueline.dischereit@uni-goettingen.de" className="text-sky-500 underline">Jacqueline Dischereit</a> & <a href="mailto:finn-matthiesen@uni-goettingen.de" className="text-sky-500 underline">Finn Matthiesen</a>.</p>
             </section>
 
-            {/* Overall Learning Objectives */}
+            {/* Overall Learning Objectives Section */}
             <section className="bg-primary-800 py-8 mt-8 text-white">
                 <div className="w-full flex flex-col px-6 gap-4">
-                    <h1 className="text-white text-center">Overall Learning Objective</h1>
+                    <h1 className="text-white">Overall Learning Objective</h1>
                     <p className="text-center text-lg"><em>The guiding question of the unit is: In which way can weeding and fertilising contribute to sustainable oil palm management?</em></p>
                     <p>Below, you find an overview of what you will be able to do by the end of this unit. Tick the boxes on the right, if you feel you have accomplished the learning objective. There will also be specific learning objectives at the beginning of each session.</p>
                     <div className="">
@@ -92,6 +93,43 @@ export default function LandingPage() {
                             </ObjectiveCheckbox>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Sessions Section */}
+            <section className="w-full py-16 px-4">
+                <h1 className="border-none text-center font-bold">Sessions</h1>
+                <p className="font-medium text-center text-slate-800">You can start by choosing one of the following this sections</p>
+                <div className="grid grid-cols-1 gap-4 mt-4">
+                    {
+                        [
+                            {
+                                title: "Session I",
+                                caption: "Oil Palm Plantation - How to Manage Them?",
+                                to: "/session1"
+                            },
+                            {
+                                title: "Session II",
+                                caption: "Network of Relationships regarding Oil Palm Management Practices",
+                                to: "/session2"
+                            },
+                            {
+                                title: "Session III",
+                                caption: "Ways towards Sustainable Oil Palm Managemant? The OPMX",
+                                to: "/session3"
+                            },
+                        ].map((item,i) => (
+                            <Link key={ i } to={ item.to }>
+                                <button className="rounded-lg bg-white shadow-lg flex flex-col p-4 gap-2 border border-gray-300 text-left">
+                                    <p className="text-xl text-primary-800 font-semibold">{ item.title }</p>
+                                    <p className="text-gray-600">{ item.caption }</p>
+                                    <span className="w-10 h-10 rounded-full bg-primary-800 text-white flex-center self-end">
+                                        <i className="bi bi-chevron-right"></i>
+                                    </span>
+                                </button>
+                            </Link>
+                        ))
+                    }
                 </div>
             </section>
 		</div>

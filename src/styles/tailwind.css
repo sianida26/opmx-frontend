@@ -6,6 +6,10 @@
     font-size: 20px;
 }
 
+h1{
+    font-family: 'Montserrat', sans-serif;
+}
+
 @layer base{
     h1{
         @apply text-primary-800 block border-b-4 border-primary-800 font-semibold text-2xl
@@ -17,7 +21,7 @@
 }
 
 @layer utilities{
-    flex-center{
+    .flex-center{
         @apply flex items-center justify-center
     }
 }
