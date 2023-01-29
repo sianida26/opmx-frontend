@@ -20,6 +20,12 @@ h1{
     }
 }
 
+@layer components{
+    .btn-next{
+        @apply bg-primary-800 flex px-4 text-white shadow-md py-2 rounded-md items-center justify-between gap-2
+    }
+}
+
 @layer utilities{
     .flex-center{
         @apply flex items-center justify-center

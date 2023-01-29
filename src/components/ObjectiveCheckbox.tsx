@@ -26,7 +26,7 @@ export default function ObjectiveCheckbox({
 					isChecked ? "bg-blue-900" : "bg-transparent"
 				}`}
 			>
-				{isChecked && <i className="bi bi-check-lg relative right-0.5 bottom-1 md:static" />}
+				{isChecked && <i className="bi bi-check-lg relative text-white" />}
 			</div>
 		</button>
 	);
