@@ -45,6 +45,24 @@ export default function LandingPage() {
                     </div>
 				</div>
 			</section>
+
+            {/* Content */}
+            <section className="w-full flex flex-col px-8 mt-8 gap-4">
+                <h1><span className="block text-zinc-600 text-lg">Introduction:</span>Sustainable Oil Palm Management</h1>
+                {/* TODO: Bold */}
+                <p>Do you know how oil palm plantations are managed and in how far that is sustainable? With the help of this module, you will discover the topic of sustainable oil palm plantation management with a focus on weeding and fertilisation strategies in three sessions.</p>
+                <p>The module is mostly about oil palm management strategies in Jambi, Indonesia, but you will also learn about oil palm plantations and management strategies in general. In the first session, you will discover oil palm plantation strategies and their impact on ecosystem functions (soil fertility) and biodiversity (understory plants and soil animals). Then, in Session II, you will design a network of relationships regarding the impacts of management practices on the oil palm, ecosystem functions and biodiversity. Afterwards, the Oil Palm Management Experiment (OPMX) is introduced in Session III – an experiment with the aim to develop strategies towards sustainable oil palm management. You will also do detective work on how oil palm plantations might be managed more ecological-friendly in the future.</p>
+                <p>Follow the booklet page by page to not miss out on any information. There is enough room for you to write down your answers immediately. You can double-click on the green boxes to type in your answer. If you should ever need more space, feel free to use additional pages. You can follow the links behind the QR codes (right click on the QR code -&gt; open link) or scan them.</p>
+                <p>If you are studying to become a teacher, there is additional information for you at the end of each session. This will help you implement your knowledge about oil palm management in your future teaching.</p>
+                <ul className="list-disc list-outside pl-4">
+                    <li><strong>Overarching activity</strong>: The design of an infographic on oil palm management should serve as cumulative activity for this unit.</li>
+                    <li><strong>Hint for tasks</strong>: Some tasks are specifically asking for your pre-knowledge. Don&apos;t worry if you have few ideas, you can return to these tasks later on and add or modify your answers. Furthermore, some tasks are open tasks. For open tasks, there might be neither correct nor wrong answers.</li>
+                    <li>Supplementary questions are no task. They should just serve as thinking stimuli for you.</li>
+                </ul>
+                <p>Enjoy working with this module and have fun making it your own experience with oil palm management.</p>
+                <p>Terima kasih.</p>
+                <p>The authors of this booklet are open for questions or feedback at any time. Contact: <a href="mailto:jacqueline.dischereit@uni-goettingen.de" className="text-sky-500 underline">Jacqueline Dischereit</a> & <a href="mailto:finn-matthiesen@uni-goettingen.de" className="text-sky-500 underline">Finn Matthiesen</a>.</p>
+            </section>
 		</div>
 	);
 }
