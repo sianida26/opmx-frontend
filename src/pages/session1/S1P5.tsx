@@ -51,21 +51,21 @@ export default function S1P5() {
 			<div className="flex flex-col text-xs gap-4 md:flex-row md:justify-between">
 				<Link
 					className="btn-prev md:max-w-1/2 md:self-end md:flex-grow-0"
-					to="../page3"
+					to="../page4"
 				>
 					<i className="bi bi-chevron-left"></i>
 					<div className="flex flex-col flex-grow">
 						<p className="font-bold">Previous Page:</p>
-						<p>Infographic: Oil Palm Management</p>
+						<p>Phases of Oil Palm Management</p>
 					</div>
 				</Link>
 				<Link
 					className="btn-next md:max-w-1/2 md:flex-grow-0"
-					to="../page5"
+					to="../page6"
 				>
 					<div className="flex flex-col">
 						<p className="font-bold">Next Page:</p>
-						<p>Oil Palm Plantation as Ecosystem</p>
+						<p>Background: Ecosystem Functions</p>
 					</div>
 					<i className="bi bi-chevron-right"></i>
 				</Link>
