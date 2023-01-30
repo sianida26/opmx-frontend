@@ -1,6 +1,6 @@
 import EFForTSLogo from "../assets/logo/EFForTS.png";
 import DFGLogo from "../assets/logo/DFG.png";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 
 export default function Session1() {
 	return (
@@ -47,6 +47,7 @@ export default function Session1() {
 				</div>
 			</section>
 			<Outlet />
+			<ScrollRestoration />
 		</div>
 	);
 }
