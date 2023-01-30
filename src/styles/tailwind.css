@@ -29,6 +29,10 @@ h1{
     .btn-prev{
         @apply border border-primary-800 flex px-4 text-primary-800 shadow-md py-2 rounded-md items-center justify-between gap-2
     }
+
+    .btn{
+        @apply bg-primary-800 flex px-4 py-2 text-white items-center rounded-md gap-2 hover:bg-primary-900 text-sm;
+    }
 }
 
 @layer utilities{
@@ -38,5 +42,9 @@ h1{
 
     .max-w-1\/2{
         max-width: 50%;
+    }
+
+    .min-h-24{
+        min-height: 6rem;
     }
 }
