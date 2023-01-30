@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function S1P1() {
 	return (
-		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4">
+		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4 max-w-screen-lg mx-auto">
 			<p>
 				In this first session, you will learn about the ecological and
 				socioeconomic effects of oil palm plantations. You will discover
@@ -58,8 +58,8 @@ export default function S1P1() {
 			</div>
 
 			{/* navigation */}
-			<div className="flex flex-col text-xs">
-				<Link className="btn-next" to="../page2">
+			<div className="flex flex-col text-xs gap-4">
+				<Link className="btn-next md:max-w-1/2 md:self-end md:flex-grow-0" to="../page2">
 					<div className="flex flex-col">
 						<p className="font-bold">Next Page:</p>
 						<p>

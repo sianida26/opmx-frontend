@@ -4,6 +4,7 @@
 
 :root{
     font-size: 20px;
+    overflow-x: hidden !important;
 }
 
 h1{
@@ -24,10 +25,18 @@ h1{
     .btn-next{
         @apply bg-primary-800 flex px-4 text-white shadow-md py-2 rounded-md items-center justify-between gap-2
     }
+
+    .btn-prev{
+        @apply border border-primary-800 flex px-4 text-primary-800 shadow-md py-2 rounded-md items-center justify-between gap-2
+    }
 }
 
 @layer utilities{
     .flex-center{
         @apply flex items-center justify-center
+    }
+
+    .max-w-1\/2{
+        max-width: 50%;
     }
 }
