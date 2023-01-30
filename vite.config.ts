@@ -10,4 +10,5 @@ export default defineConfig({
     // @ts-ignore
 		alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
 	},
+	base: '/opmx-frontend/'
 });
