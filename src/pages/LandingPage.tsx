@@ -91,21 +91,21 @@ export default function LandingPage() {
 				<p>
 					Do you know how oil palm plantations are managed and in how
 					far that is sustainable? With the help of this module, you
-					will discover the topic of sustainable oil palm plantation
-					management with a focus on weeding and fertilisation
-					strategies in three sessions.
+					will discover the topic of <strong>sustainable oil palm plantation
+					management</strong> with a <strong>focus on weeding and fertilisation
+					strategies</strong> in three sessions.
 				</p>
 				<p>
 					The module is mostly about oil palm management strategies in
 					Jambi, Indonesia, but you will also learn about oil palm
 					plantations and management strategies in general. In the
-					first session, you will discover oil palm plantation
-					strategies and their impact on ecosystem functions (soil
-					fertility) and biodiversity (understory plants and soil
-					animals). Then, in Session II, you will design a network of
-					relationships regarding the impacts of management practices
+					first session, you will discover <strong>oil palm plantation
+					strategies and their impact on ecosystem functions</strong> (soil
+					fertility) <strong>and biodiversity</strong> (understory plants and soil
+					animals). Then, in Session II, you will <strong>design a network of
+					relationships</strong> regarding the impacts of management practices
 					on the oil palm, ecosystem functions and biodiversity.
-					Afterwards, the Oil Palm Management Experiment (OPMX) is
+					Afterwards, the <strong>Oil Palm Management Experiment (OPMX)</strong> is
 					introduced in Session III – an experiment with the aim to
 					develop strategies towards sustainable oil palm management.
 					You will also do detective work on how oil palm plantations
