@@ -5,6 +5,7 @@ import S1P1 from "./pages/session1/S1P1";
 import S1P2 from "./pages/session1/S1P2";
 import S1P3 from "./pages/session1/S1P3";
 import S1P4 from "./pages/session1/S1P4";
+import S1P5 from "./pages/session1/S1P5";
 function App() {
 	return (
 		<Routes>
@@ -15,6 +16,7 @@ function App() {
 				<Route path="page2" element={<S1P2 />} />
 				<Route path="page3" element={<S1P3 />} />
 				<Route path="page4" element={<S1P4 />} />
+				<Route path="page5" element={<S1P5 />} />
 			</Route>
 		</Routes>
 	);
