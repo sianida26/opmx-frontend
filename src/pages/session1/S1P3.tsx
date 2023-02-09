@@ -90,30 +90,6 @@ export default function S1P3() {
 					</div>
 				</div>
 			</InfoBox>
-
-			{/* navigation */}
-			<div className="flex flex-col text-xs gap-4 md:flex-row md:justify-between">
-				<Link
-					className="btn-prev md:max-w-1/2 md:self-end md:flex-grow-0"
-					to="../page2"
-				>
-					<i className="bi bi-chevron-left"></i>
-					<div className="flex flex-col flex-grow">
-						<p className="font-bold">Previous Page:</p>
-						<p>Density of Oil Palm Plantations in South East Asia</p>
-					</div>
-				</Link>
-				<Link
-					className="btn-next md:max-w-1/2 md:flex-grow-0"
-					to="../page4"
-				>
-					<div className="flex flex-col">
-						<p className="font-bold">Next Page:</p>
-						<p>Phases of Oil Palm Management</p>
-					</div>
-					<i className="bi bi-chevron-right"></i>
-				</Link>
-			</div>
 		</main>
 	);
 }

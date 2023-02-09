@@ -56,19 +56,6 @@ export default function S1P1() {
 					. (Ananggadipa Raswanto, 2019).
 				</span>
 			</div>
-
-			{/* navigation */}
-			<div className="flex flex-col text-xs gap-4">
-				<Link className="btn-next md:max-w-1/2 md:self-end md:flex-grow-0" to="../page2">
-					<div className="flex flex-col">
-						<p className="font-bold">Next Page:</p>
-						<p>
-							Density of Oil Palm Plantations in South East Asia
-						</p>
-					</div>
-                    <i className="bi bi-chevron-right"></i>
-				</Link>
-			</div>
 		</main>
 	);
 }

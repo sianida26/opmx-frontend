@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
+import session1 from "./data/session1";
 import Session1 from "./layouts/Session1";
 import LandingPage from "./pages/LandingPage";
 import S1P1 from "./pages/session1/S1P1";
@@ -11,42 +12,25 @@ import S1P6 from "./pages/session1/S1P6";
 function App() {
 
 	const router = createBrowserRouter([
+		//Landing page route
 		{
 			path: "/",
 			element: <LandingPage />,
 		},
+
+		//Session 1 routes
 		{
 			path: "/session1",
 			element: <Session1 />,
 			children: [
 				{
 					index: true,
-					element: <Navigate to="./page1" />,
+					element: <Navigate to="./page1" replace />,
 				},
-				{
-					path: "page1",
-					element: <S1P1 />,
-				},
-				{
-					path: "page2",
-					element: <S1P2 />,
-				},
-				{
-					path: "page3",
-					element: <S1P3 />,
-				},
-				{
-					path: "page4",
-					element: <S1P4 />,
-				},
-				{
-					path: "page5",
-					element: <S1P5 />,
-				},
-				{
-					path: "page6",
-					element: <S1P6 />,
-				},
+				...session1.map(x => ({
+					path: `page${x.page}`,
+					element: x.element,
+				}))
 			]
 		}
 	], {

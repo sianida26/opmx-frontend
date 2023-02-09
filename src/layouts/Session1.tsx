@@ -1,8 +1,29 @@
 import EFForTSLogo from "../assets/logo/EFForTS.png";
 import DFGLogo from "../assets/logo/DFG.png";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import session1 from "@/data/session1";
 
 export default function Session1() {
+	const [currentPage, setCurrentPage] = useState(0);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		//retrieve page number
+		const page = parseInt(
+			location.pathname.match(/page(\d+)$/)?.[1] ?? "0"
+		);
+
+		setCurrentPage(page);
+
+		//find object
+		const title = session1.find((x) => x.page === page)?.title ?? "OPMX";
+
+		//update title
+		document.title = title;
+	}, [location]);
+
 	return (
 		<div className="w-screen overflow-x-hidden">
 			<section id="landing-cover" className="relative w-full">
@@ -23,7 +44,8 @@ export default function Session1() {
 									Session I:
 								</span>
 								<span className="text-center lg:text-left font-semibold text-2xl">
-                                Oil Palm Plantations &minus; How to Manage Them?
+									Oil Palm Plantations &minus; How to Manage
+									Them?
 								</span>
 							</div>
 
@@ -47,6 +69,31 @@ export default function Session1() {
 				</div>
 			</section>
 			<Outlet />
+			{/* navigation */}
+			<div className="flex flex-col text-xs gap-4 md:flex-row md:justify-between w-full max-w-screen-lg mx-auto px-6 pb-4 poppins">
+				{currentPage > 1 && (
+					<Link
+						className="btn-prev md:max-w-1/2 md:self-end md:flex-grow-0"
+						to={`./page${ currentPage - 1 }`}
+					>
+						<i className="bi bi-chevron-left"></i>
+						<div className="flex flex-col flex-grow">
+							<p className="font-bold">Previous Page:</p>
+							<p>{ session1.find(x => x.page === currentPage-1)?.title ?? "" }</p>
+						</div>
+					</Link>
+				)}
+				<Link
+					className="btn-next md:max-w-1/2 md:self-end md:flex-grow-0"
+					to={`./page${ currentPage + 1 }`}
+				>
+					<div className="flex flex-col">
+						<p className="font-bold">Next Page:</p>
+						<p>{ session1.find(x => x.page === currentPage+1)?.title ?? "End of Course" }</p>
+					</div>
+					<i className="bi bi-chevron-right"></i>
+				</Link>
+			</div>
 			<ScrollRestoration />
 		</div>
 	);
