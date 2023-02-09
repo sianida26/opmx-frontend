@@ -4,6 +4,7 @@ import S1P3 from "@/pages/session1/S1P3"
 import S1P4 from "@/pages/session1/S1P4"
 import S1P5 from "@/pages/session1/S1P5"
 import S1P6 from "@/pages/session1/S1P6"
+import S1P7 from "@/pages/session1/S1P7"
 
 const session1 = [
     {
@@ -35,6 +36,11 @@ const session1 = [
         page: 6,
         title: "Background: Ecosystem Functions",
         element: <S1P6 />
+    },
+    {
+        page: 7,
+        title: "Oil Palm Plantations: Effects on Ecosystem Functions",
+        element: <S1P7 />
     },
 ]
 
