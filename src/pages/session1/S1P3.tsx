@@ -36,7 +36,7 @@ export default function S1P3() {
 				criteria for the infographics at the end of this session.
 			</p>
 			<iframe
-				src="https://sianida26.github.io/opmx/session_1/task_2/"
+				src={`${ import.meta.env.VITE_TASK_BASE_URL }/session_1/task_2/`}
 				title="Task 1"
 				className="w-full h-96"
 			></iframe>

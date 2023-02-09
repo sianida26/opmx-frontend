@@ -29,7 +29,7 @@ export default function S1P2() {
 				click on the map to mark the area
 			</p>
 			<iframe
-				src="https://sianida26.github.io/opmx/session_1/task_1/"
+				src={`${ import.meta.env.VITE_TASK_BASE_URL }/session_1/task_1/`}
 				title="Task 1"
 				className="w-full h-96"
 			></iframe>
