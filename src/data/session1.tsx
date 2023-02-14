@@ -6,6 +6,7 @@ import S1P5 from "@/pages/session1/S1P5"
 import S1P6 from "@/pages/session1/S1P6"
 import S1P7 from "@/pages/session1/S1P7"
 import S1P8 from "@/pages/session1/S1P8"
+import S1P9 from "@/pages/session1/S1P9"
 
 const session1 = [
     {
@@ -47,6 +48,11 @@ const session1 = [
         page: 8,
         title: "Environmental Effects of Oil Palm Plantations",
         element: <S1P8 />
+    },
+    {
+        page: 9,
+        title: "Scientific Data: Land-Use Change on Sumatra",
+        element: <S1P9 />
     },
 ]
 
