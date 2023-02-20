@@ -1,10 +1,39 @@
+import { useEffect } from "react";
 import figure4 from "@/assets/figure4.png";
 import figure5 from "@/assets/figure5.png";
 import figure6 from "@/assets/figure6.png";
 import InfoBox from "@/components/InfoBox";
-import { Link } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks";
+import { updateCoordinateTask1 } from "@/redux/slices/session1Slice";
+import { IFrameTaskMessage } from "@/interfaces";
 
 export default function S1P2() {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		const handler = (
+			ev: MessageEvent<IFrameTaskMessage<number[]>>
+		) => {
+			const messageData = ev.data;
+			if (typeof messageData !== "object") return;
+			if (!messageData.taskId) return;
+			if (messageData.taskId !== "s1t1") return;
+			if (!messageData.value) return;
+
+			//update coordinate data into redux
+			if (messageData.action === "updateCoordinate") {
+				if (!(messageData.value instanceof Array))
+					throw new Error("Message value must be an array")
+				dispatch(updateCoordinateTask1(messageData.value))
+			}
+		};
+
+		window.addEventListener("message", handler);
+
+		// Don't forget to remove addEventListener
+		return () => window.removeEventListener("message", handler);
+	}, []);
+
 	return (
 		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4 max-w-screen-lg mx-auto">
 			<h1>Density of Oil Palm Plantations in South East Asia</h1>
@@ -29,7 +58,7 @@ export default function S1P2() {
 				click on the map to mark the area
 			</p>
 			<iframe
-				src={`${ import.meta.env.VITE_TASK_BASE_URL }/session_1/task_1/`}
+				src={`${import.meta.env.VITE_TASK_BASE_URL}/session_1/task_1/`}
 				title="Task 1"
 				className="w-full h-96"
 			></iframe>

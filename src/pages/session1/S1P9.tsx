@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
-import figure1 from "@/assets/figure1.jpg";
-import { Link } from "react-router-dom";
-import image6 from "@/assets/image6.png";
-import image7 from "@/assets/image7.png";
 import image8 from "@/assets/image8.png";
-import { Popover, Mark, Text } from "@mantine/core";
 import InfoBox from "@/components/InfoBox";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateValueTask6 } from "@/redux/slices/session1Slice";
 
 export default function S1P9() {
-	const [data, setData] = useState("");
+	
+	const value = useAppSelector(selector => selector.session1.task6?.value) ?? "";
+	const dispatch = useAppDispatch()
+
+	const handleTask6Change = (value: string) => {
+		dispatch(updateValueTask6(value))
+	}
 
 	return (
 		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4 max-w-screen-lg mx-auto with-custom-popover">
@@ -44,8 +46,8 @@ export default function S1P9() {
 
 				{/* the input */}
 				<textarea
-					// value={task4}
-					// onChange={(e) => handleTask4Change(e.target.value)}
+					value={value}
+					onChange={(e) => handleTask6Change(e.target.value)}
 					className="w-full relative text-sm min-h-24 py-2 focus:outline-none"
 				/>
 			</div>

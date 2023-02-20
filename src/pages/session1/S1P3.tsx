@@ -2,9 +2,39 @@ import infographic1 from "@/assets/infographic1.png";
 import infographic2 from "@/assets/infographic2.png";
 import infographic3 from "@/assets/infographic3.png";
 import InfoBox from "@/components/InfoBox";
-import { Link } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks";
+import { useEffect } from "react";
+import { IFrameTaskMessage } from "@/interfaces";
+import { updateValueTask2 } from "@/redux/slices/session1Slice";
 
 export default function S1P3() {
+
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		const handler = (
+			ev: MessageEvent<IFrameTaskMessage<string[]>>
+		) => {
+			const messageData = ev.data;
+			if (typeof messageData !== "object") return;
+			if (!messageData.taskId) return;
+			if (messageData.taskId !== "s1t2") return;
+			if (!messageData.value) return;
+
+			//update coordinate data into redux
+			if (messageData.action === "updateValues") {
+				if (!(messageData.value instanceof Array))
+					throw new Error("Message value must be an array")
+				dispatch(updateValueTask2(messageData.value))
+			}
+		};
+
+		window.addEventListener("message", handler);
+
+		// Don't forget to remove addEventListener
+		return () => window.removeEventListener("message", handler);
+	}, []);
+
 	return (
 		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4 max-w-screen-lg mx-auto">
 			<h1>Infographic: Oil Palm Management</h1>

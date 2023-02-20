@@ -1,8 +1,36 @@
-import { useState } from "react";
-import figure1 from "@/assets/figure1.jpg";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { IFrameTaskMessage } from "@/interfaces";
+import { useAppDispatch } from "@/redux/hooks";
+import { updateStatesTask5 } from "@/redux/slices/session1Slice";
 
 export default function S1P7() {
+
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		const handler = (
+			ev: MessageEvent<IFrameTaskMessage<("+"|"-"|"")[]>>
+		) => {
+			const messageData = ev.data;
+			if (typeof messageData !== "object") return;
+			if (!messageData.taskId) return;
+			if (messageData.taskId !== "s1t5") return;
+			if (!messageData.value) return;
+
+			//update coordinate data into redux
+			if (messageData.action === "updateStates") {
+				if (!(messageData.value instanceof Array))
+					throw new Error("Message value must be an array")
+				dispatch(updateStatesTask5(messageData.value))
+			}
+		};
+
+		window.addEventListener("message", handler);
+
+		// Don't forget to remove addEventListener
+		return () => window.removeEventListener("message", handler);
+	}, []);
+
 	return (
 		<main className="w-full text-slate-800 px-6 py-8 poppins flex flex-col gap-4 max-w-screen-lg mx-auto">
 			<h1>Oil Palm Plantations: Effects on Ecosystem Functions</h1>

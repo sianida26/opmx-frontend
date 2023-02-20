@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { startTask11 } from "@/redux/slices/dataSlice";
+import { startTask11, task11UpdateValue, task12AddRow, task12ChangeAdvantages, task12ChangeDisadvantages, task12DeleteRow } from "@/redux/slices/session1Slice";
 import { Textarea } from "@mantine/core";
 import { Fragment, useState, useEffect, useRef } from "react";
 import image14 from "@/assets/image14.png";
@@ -13,13 +13,12 @@ interface Table3DataType {
 export default function S1P11() {
 	const dispatch = useAppDispatch();
 	const timerRef = useRef<HTMLSpanElement>(null);
-	const [ table3Data, setTable3Data ] = useState<Table3DataType>({
-		rows: 3,
-		advantages: [...new Array(3)].map(() => ""),
-		disadvantages: [...new Array(3)].map(() => ""),
-	})
 	const [ isExpired, setExpired ] = useState(false);
-	const task11Expiry = useAppSelector(selector => selector.data.task11Expiry);
+	const task11Expiry = useAppSelector(selector => selector.session1.task11.expiry);
+	const task11Value = useAppSelector(selector => selector.session1.task11.value)
+	const rows = useAppSelector(selector => selector.session1.task12.rows)
+	const advantages = useAppSelector(selector => selector.session1.task12.advantages)
+	const disadvantages = useAppSelector(selector => selector.session1.task12.disadvantages)
 
 	useEffect(() => {
 		// if (task11Expiry !== null) return;
@@ -30,8 +29,8 @@ export default function S1P11() {
 			if (timerRef.current === null) return;
 			if (task11Expiry === null) return;
 			const currentDate = new Date();
-			if (currentDate < task11Expiry) {
-				const timeDiff = task11Expiry.getTime() - currentDate.getTime();
+			if (currentDate.getTime() < task11Expiry) {
+				const timeDiff = task11Expiry - currentDate.getTime();
 				const minutes = Math.floor(timeDiff / 60000);
 				const seconds = Math.floor((timeDiff % 60000) / 1000);
 				timerRef.current.innerText =
@@ -48,52 +47,20 @@ export default function S1P11() {
 		return () => clearInterval(interval);
 	}, [task11Expiry]);
 
-	const changeAdvantages = (id: number, value: string) => {
-		setTable3Data(prev => {
-			const newAdvantages = prev.advantages.slice()
-			newAdvantages[id] = value
-			return {
-				...prev,
-				advantages: newAdvantages
-			}
-		})
+	const changeAdvantages = (index: number, value: string) => {
+		dispatch(task12ChangeAdvantages({ index, value }))
 	}
 
-	const changeDisadvantages = (id: number, value: string) => {
-		setTable3Data(prev => {
-			const newDisadvantages = prev.disadvantages.slice()
-			newDisadvantages[id] = value
-			return {
-				...prev,
-				disadvantages: newDisadvantages
-			}
-		})
+	const changeDisadvantages = (index: number, value: string) => {
+		dispatch(task12ChangeDisadvantages({ index, value }))
 	}
 
-	const handleDeleteRow = (id: number) => {
-		setTable3Data(prev => {
-			const newDisadvantages = [...prev.disadvantages]
-			const newAdvantages = [...prev.advantages]
-
-			newDisadvantages.splice(id, 1)
-			newAdvantages.splice(id, 1)
-
-			return {
-				rows: prev.rows <= 3 ? prev.rows : prev.rows - 1,
-				advantages: newAdvantages,
-				disadvantages: newDisadvantages,
-			}
-		})
+	const handleDeleteRow = (index: number) => {
+		dispatch(task12DeleteRow(index))
 	}
 
 	const handleAddRow = () => {
-		setTable3Data(prev => {
-			return {
-				rows: prev.rows >= 10 ? prev.rows : prev.rows + 1,
-				advantages: [...prev.advantages, ""],
-				disadvantages: [...prev.disadvantages, ""],
-			}
-		})
+		dispatch(task12AddRow())
 	}
 
 	return (
@@ -149,16 +116,18 @@ export default function S1P11() {
 				variant="unstyled"
 				autosize
 				readOnly={isExpired}
+				value={ task11Value }
+				onChange={ (e) => dispatch(task11UpdateValue(e.target.value)) }
 				minRows={8}
 				placeholder="Write down your answer here"
 				className="rounded-md border border-primary-800 px-2 text-lg"
 			/>
-			<div className="flex-center">
+			{/* <div className="flex-center">
 				<button disabled={isExpired} className="btn py-1">
 					<i className="bi bi-check-lg text-lg"></i>
 					{isExpired ? "Saved" : "Save"}
 				</button>
-			</div>
+			</div> */}
 
 			<div className="flex flex-col text-sm">
 				<em>Supplementary question:</em>
@@ -228,11 +197,11 @@ export default function S1P11() {
 					<div className="border border-primary-900 py-1 bg-primary-900 rounded-tr-md text-white">
 						Disadvantages
 					</div>
-					{[...new Array(table3Data.rows).keys()].map((x) => (
+					{[...new Array(rows).keys()].map((x) => (
 						<Fragment key={x}>
 							<div
 								className={`${
-									x === table3Data.rows - 1
+									x === rows - 1
 										? "rounded-bl-md"
 										: "border-b-2"
 								} border-r-2 border-primary-900`}
@@ -242,14 +211,14 @@ export default function S1P11() {
 										changeAdvantages(x, e.target.value)
 									}
 									autosize
-									value={table3Data.advantages[x] ?? ""}
+									value={advantages[x] ?? ""}
 									variant="unstyled"
 									className="p-1 text-primary-900 border-none focus:outline-none"
 								/>
 							</div>
 							<div
 								className={`${
-									x === table3Data.rows - 1
+									x === rows - 1
 										? "rounded-br-md"
 										: "border-b-2"
 								} border-primary-900 relative`}
@@ -259,11 +228,11 @@ export default function S1P11() {
 										changeDisadvantages(x, e.target.value)
 									}
 									autosize
-									value={table3Data.disadvantages[x] ?? ""}
+									value={disadvantages[x] ?? ""}
 									variant="unstyled"
 									className="p-1 text-primary-900 border-none focus:outline-none"
 								/>
-								{table3Data.rows > 3 && (
+								{rows > 3 && (
 									<button
 										className="rounded-full w-5 h-5 flex-center text-gray-600 absolute z-[1] top-1.5 right-2"
 										onClick={() => handleDeleteRow(x)}
@@ -276,7 +245,7 @@ export default function S1P11() {
 					))}
 				</div>
 				<div className="flex-center mt-2">
-					{ table3Data.rows < 10 &&
+					{ rows < 10 &&
 						<button
 							className="btn text-xs py-1 px-2 shadow-md"
 							onClick={handleAddRow}

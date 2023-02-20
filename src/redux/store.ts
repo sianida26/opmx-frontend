@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import dataReducer from './slices/dataSlice';
+import session1Reducer from './slices/session1Slice';
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +19,7 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, combineReducers({ data: dataReducer }))
+const persistedReducer = persistReducer(persistConfig, combineReducers({ session1: session1Reducer }))
 
 export const store = configureStore({
   reducer: persistedReducer,

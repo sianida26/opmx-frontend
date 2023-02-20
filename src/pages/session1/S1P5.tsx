@@ -1,12 +1,17 @@
 import { useState } from "react";
 import figure1 from "@/assets/figure1.jpg";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updateValueTask4 } from "@/redux/slices/session1Slice";
 
 export default function S1P5() {
-	const [task4, setTask4] = useState("");
+	// const [task4, setTask4] = useState("");
+	const dispatch = useAppDispatch()
+	const task4 = useAppSelector(state => state.session1.task4?.value) ?? ""
 
 	const handleTask4Change = (value: string) => {
-		setTask4(value);
+		// setTask4(value);
+		dispatch(updateValueTask4(value))
 	};
 
 	return (

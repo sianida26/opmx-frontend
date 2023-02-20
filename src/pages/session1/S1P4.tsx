@@ -1,21 +1,28 @@
 import { useState } from "react";
 import figure1 from "@/assets/figure1.jpg";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { updatePhasesTask3 } from "@/redux/slices/session1Slice";
 
 export default function S1P4() {
-	const [phases, setPhases] = useState<string[]>(["", "", ""]);
+	const dispatch = useAppDispatch();
+	const phases = useAppSelector((state) => state.session1.task3.phases);
+	// const [phases, setPhases] = useState<string[]>(initialPhases);
 
 	const handlePhaseChange = (index: number, value: string) => {
-		setPhases((prev) => prev.map((x, i) => (i === index ? value : x)));
+		const temp = phases.map((x, i) => (i === index ? value : x));
+		dispatch(updatePhasesTask3(temp));
 	};
 
 	const handleAddPhase = () => {
-		setPhases((prev) => [...prev, ""]);
+		// setPhases((prev) => [...prev, ""]);
+		dispatch(updatePhasesTask3([...phases, ""]));
 	};
 
 	const handleDeletePhase = (index: number) => {
 		if (index < 3) return;
-		setPhases((prev) => prev.filter((_, i) => i !== index));
+		const temp = phases.filter((_, i) => i !== index);
+		dispatch(updatePhasesTask3(temp));
 	};
 
 	return (
@@ -82,7 +89,11 @@ export default function S1P4() {
 						type="video/mp4"
 					/>
 				</video>
-				<p className="text-xs"><strong>Video 2</strong>: Tutorial Perkebunan Kelapa Sawit Berkelanjutan: Tanaman Menghasilkan. (Conservation International, 2019). https://youtu.be/pLO7tG__I8g</p>
+				<p className="text-xs">
+					<strong>Video 2</strong>: Tutorial Perkebunan Kelapa Sawit
+					Berkelanjutan: Tanaman Menghasilkan. (Conservation
+					International, 2019). https://youtu.be/pLO7tG__I8g
+				</p>
 			</div>
 		</main>
 	);

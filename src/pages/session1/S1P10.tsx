@@ -24,7 +24,10 @@ import ganoderma from "@/assets/ganoderma1.png";
 import { Textarea } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
-
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { task7AddRow, task7DeleteRow, task7ChangeAdvantages, task7ChangeDisadvantages, task8UpdateStates, task9UpdateFunction } from "@/redux/slices/session1Slice";
+import { IFrameTaskMessage } from "@/interfaces";
+import elements from "@/data/elements";
 // TODO: fix autoplay
 
 const MIN_ROW = 3;
@@ -46,83 +49,68 @@ const nutrientDeficiencies = new Map(
 
 export default function S1P10() {
 	const autoplay = useRef(Autoplay({ delay: 3000 }))
-	const [rows, setRows] = useState(3);
-	const [advantages, setAdvantages] = useState<string[]>([]);
-	const [disadvantages, setDisadvantages] = useState<string[]>([]);
-	const [selectedElements, setSelectedElements] = useState<
-		Map<string, string>
-	>(new Map());
+	const dispatch = useAppDispatch()
+	const rows = useAppSelector(selector => selector.session1.task7?.rows) ?? 3
+	const advantages = useAppSelector(selector => selector.session1.task7?.advantages) ?? ["", "", ""]
+	const disadvantages = useAppSelector(selector => selector.session1.task7?.disadvantages) ?? ["", "", ""]
+	const selectedElements = useAppSelector(selector => selector.session1.task9?.funcs) ?? new Map<number,string>()
 
 	useEffect(() => {
-		// Listen to iframe event
-		// Source: https://thuannp.com/react-communication-with-iframe/
-		const handleElementChange = (
-			event: MessageEvent<{ type: string; message: string }>
+		const handler = (
+			ev: MessageEvent<IFrameTaskMessage<Map<number,string>>>
 		) => {
-			if (typeof event.data !== "object") return;
-			if (!event.data.type) return;
+			const messageData = ev.data;
+			if (typeof messageData !== "object") return;
+			if (!messageData.taskId) return;
+			if (messageData.taskId !== "s1t8") return;
+			if (!messageData.value) return;
 
-			switch (event.data.type) {
-				case "element-add":
-					setSelectedElements((prev) => {
-						const temp = new Map(prev);
-						temp.set(event.data.message, "");
-						return temp;
-					});
-					break;
-				case "element-delete":
-					setSelectedElements((prev) => {
-						const temp = new Map(prev);
-						temp.delete(event.data.message);
-						return temp;
-					});
-					break;
+			//update coordinate data into redux
+			if (messageData.action === "updateStates") {
+				if (!(messageData.value instanceof Map))
+					throw new Error("Message value must be an array")
+				dispatch(task8UpdateStates(messageData.value))
 			}
 		};
-		window.addEventListener("message", handleElementChange);
-		return () => window.removeEventListener("message", handleElementChange);
+
+		window.addEventListener("message", handler);
+
+		// Don't forget to remove addEventListener
+		return () => window.removeEventListener("message", handler);
 	}, []);
 
-	const changeAdvantages = (id: number, value: string) => {
-		setAdvantages((prev) => {
-			const temp = [...prev];
-			temp[id] = value;
-			return temp;
-		});
+	const changeAdvantages = (index: number, value: string) => {
+		// setAdvantages((prev) => {
+		// 	const temp = [...prev];
+		// 	temp[id] = value;
+		// 	return temp;
+		// });
+		dispatch(task7ChangeAdvantages({ index, value }))
 	};
 
-	const changeDisadvantages = (id: number, value: string) => {
-		setDisadvantages((prev) => {
-			const temp = [...prev];
-			temp[id] = value;
-			return temp;
-		});
+	const changeDisadvantages = (index: number, value: string) => {
+		// setDisadvantages((prev) => {
+		// 	const temp = [...prev];
+		// 	temp[id] = value;
+		// 	return temp;
+		// });
+		dispatch(task7ChangeDisadvantages({ index, value }))
 	};
 
 	const handleAddRow = () => {
-		setRows((prev) =>
-			prev >= MIN_ROW && prev < MAX_ROW ? prev + 1 : prev
-		);
+		dispatch(task7AddRow())
 	};
 
 	const handleDeleteRow = (id: number) => {
-		setRows((prev) =>
-			prev > MIN_ROW && prev <= MAX_ROW ? prev - 1 : prev
-		);
-		setAdvantages((prev) => {
-			return prev.filter((_, i) => i !== id);
-		});
-		setDisadvantages((prev) => {
-			return prev.filter((_, i) => i !== id);
-		});
+		dispatch(task7DeleteRow(id))
 	};
 
 	const handleElementFunctionChange = (element: string, value: string) => {
-		setSelectedElements((prev) => {
-			const temp = new Map(prev);
-			temp.set(element, value);
-			return temp;
-		});
+		// setSelectedElements((prev) => {
+		// 	const temp = new Map(prev);
+		// 	temp.set(element, value);
+		// 	return temp;
+		// });
 	};
 
 	return (
@@ -169,7 +157,7 @@ export default function S1P10() {
 										changeAdvantages(x, e.target.value)
 									}
 									autosize
-									// value={advantages[x] ?? ""}
+									value={advantages[x] ?? ""}
 									variant="unstyled"
 									className="p-1 text-primary-900 border-none focus:outline-none"
 								/>
@@ -186,7 +174,7 @@ export default function S1P10() {
 										changeDisadvantages(x, e.target.value)
 									}
 									autosize
-									// value={disadvantages[x] ?? ""}
+									value={disadvantages[x] ?? ""}
 									variant="unstyled"
 									className="p-1 text-primary-900 border-none focus:outline-none"
 								/>
@@ -268,39 +256,36 @@ export default function S1P10() {
 							element for oil palm growth and health could be?
 						</small>
 					</div>
-					{selectedElements.size === 0 ? (
+					{selectedElements.length === 0 ? (
 						<div className="col-span-2 flex-center py-2">
 							Please select any of the elements in periodic table
 							above
 						</div>
 					) : (
-						[...selectedElements.entries()].map((x, i) => (
+						selectedElements.map((element, i) => (
 							<Fragment key={i}>
 								<div
 									className={`${
-										i === selectedElements.size - 1
+										i === selectedElements.length - 1
 											? "rounded-bl-md"
 											: "border-b-2"
 									} border-r-2 border-primary-900 flex-center`}
 								>
-									{x[0]}
+									{elements.find(x => x.z === element[0])?.name} ({ elements.find(x => x.z === element[0])?.symbol })
 								</div>
 								<div
 									className={`${
-										i === selectedElements.size - 1
+										i === selectedElements.length - 1
 											? "rounded-br-md"
 											: "border-b-2"
 									} border-primary-900 relative`}
 								>
 									<Textarea
 										onChange={(e) =>
-											handleElementFunctionChange(
-												x[0],
-												e.target.value
-											)
+											dispatch(task9UpdateFunction({ z: element[0], value: e.target.value }))
 										}
 										autosize
-										// value={x[1]}
+										value={element[1]}
 										variant="unstyled"
 										className="p-1 text-primary-900 border-none focus:outline-none"
 									/>
