@@ -13,25 +13,25 @@ interface Table3DataType {
 export default function S1P11() {
 	const dispatch = useAppDispatch();
 	const timerRef = useRef<HTMLSpanElement>(null);
-	const [expiry, setExpiry] = useState(
-		new Date(new Date().getTime() + 0.1 * 60000)
-	);
 	const [ table3Data, setTable3Data ] = useState<Table3DataType>({
 		rows: 3,
 		advantages: [...new Array(3)].map(() => ""),
 		disadvantages: [...new Array(3)].map(() => ""),
 	})
 	const [ isExpired, setExpired ] = useState(false);
-	// const task11Expiry = useAppSelector(selector => selector.data.task11Expiry);
+	const task11Expiry = useAppSelector(selector => selector.data.task11Expiry);
 
 	useEffect(() => {
 		// if (task11Expiry !== null) return;
-		// dispatch(startTask11());
+		if (task11Expiry === null)
+			dispatch(startTask11());
+
 		const interval = setInterval(() => {
 			if (timerRef.current === null) return;
+			if (task11Expiry === null) return;
 			const currentDate = new Date();
-			if (currentDate < expiry) {
-				const timeDiff = expiry.getTime() - currentDate.getTime();
+			if (currentDate < task11Expiry) {
+				const timeDiff = task11Expiry.getTime() - currentDate.getTime();
 				const minutes = Math.floor(timeDiff / 60000);
 				const seconds = Math.floor((timeDiff % 60000) / 1000);
 				timerRef.current.innerText =
@@ -46,7 +46,7 @@ export default function S1P11() {
 		}, 50);
 
 		return () => clearInterval(interval);
-	}, []);
+	}, [task11Expiry]);
 
 	const changeAdvantages = (id: number, value: string) => {
 		setTable3Data(prev => {

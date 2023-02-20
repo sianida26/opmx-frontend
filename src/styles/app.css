@@ -1,7 +1,7 @@
 #landing-cover{
     background: linear-gradient(0deg, rgba(6, 78, 59, 0.75), rgba(6, 78, 59, 0.75)), url(../assets/background.jpg);
     background-size: cover;
-    object-fit: cover;
+    background-position: 0%
 }
 
 #background-2{

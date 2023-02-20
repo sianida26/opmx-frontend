@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import EFForTSLogo from "@/assets/logo/EFForTS.png";
 import DFGLogo from "@/assets/logo/DFG.png";
 import checkIcon from "@/assets/check-circle-rounded.svg";
-import { Link } from "react-router-dom";
+import { Link, ScrollRestoration } from "react-router-dom";
 
 export default function Session1Finish() {
 	useEffect(() => {
@@ -78,6 +78,7 @@ export default function Session1Finish() {
 					I.
 				</p>
 			</div>
+            <ScrollRestoration />
 		</div>
 	);
 }
