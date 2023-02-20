@@ -1,11 +1,51 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import image11 from "@/assets/image11.png";
+import nitrogen1 from "@/assets/nitrogen1.png";
+import nitrogen2 from "@/assets/nitrogen2.png";
+import phosphorus1 from "@/assets/phosphorus1.png";
+import phosphorus2 from "@/assets/phosphorus2.png";
+import phosphorus3 from "@/assets/phosphorus3.png";
+import potassium1 from "@/assets/potassium1.png";
+import potassium2 from "@/assets/potassium2.png";
+import potassium3 from "@/assets/potassium3.png";
+import magnesium1 from "@/assets/magnesium1.png";
+import magnesium2 from "@/assets/magnesium2.png";
+import magnesium3 from "@/assets/magnesium3.png";
+import boron1 from "@/assets/boron1.png";
+import boron2 from "@/assets/boron2.png";
+import boron3 from "@/assets/boron3.png";
+import copper1 from "@/assets/copper1.png";
+import copper2 from "@/assets/copper2.png";
+import iron1 from "@/assets/iron1.png";
+import iron2 from "@/assets/iron2.png";
+import nk1 from "@/assets/nk1.png";
+import nk2 from "@/assets/nk2.png";
+import ganoderma from "@/assets/ganoderma1.png";
 import { Textarea } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+// TODO: fix autoplay
 
 const MIN_ROW = 3;
 const MAX_ROW = 10;
 
+const nutrientDeficiencies = new Map(
+	[ 
+		['Nitrogen', { images: [ nitrogen1, nitrogen2 ], description: "Pale green or yellow-green leaves caused by lack of chlorophyll. Occurs in flooded, waterlogged, and anoxic soils." }],
+		['Phosphorus', { images: [ phosphorus1, phosphorus2, phosphorus3 ], description: "Slow growth and leaves become olive-green, brown necrosis occur around edges. Palms are appearing stunted and have a small bunch size with a pyramid-like shaped trunk." }],
+		['Potassium', { images: [ potassium1, potassium2, potassium3 ], description: "Confluent orange spotting, marginal necrosis on older leaves. Typical on peatland." }],
+		['Magnesium', { images: [ magnesium1, magnesium2, magnesium3 ], description: "Strong and striking orange colour, hence also called Orange Frond. Typical on sandy soils with high rainfall." }],
+		['Boron', { images: [ boron1, boron2, boron3 ], description: "Small hook leaves with bent points are corrugated and malformed. Short petioles." }],
+		['Copper', { images: [ copper1, copper2 ], description: "Also known as ‘nursery white stripe’, mainly on younger leaves with chlorosis and necrosis on the tips. Small fruit bunches. Typical on peatland." }],
+		['Iron', { images: [ iron1, iron2 ], description: "Pale chlorosis and necrosis in sand culture. Rare with oil palms growing on acid soils with much iron oxide." }],
+		['Nitrogen-Potassium Imbalance', { images: [ nk1, nk2 ], description: "Known as white stripe and occurs where the K:N ratio is wide." }],
+		['Ganoderma', { images: [ ganoderma ], description: "" }],
+	]
+)
+
 export default function S1P10() {
+	const autoplay = useRef(Autoplay({ delay: 3000 }))
 	const [rows, setRows] = useState(3);
 	const [advantages, setAdvantages] = useState<string[]>([]);
 	const [disadvantages, setDisadvantages] = useState<string[]>([]);
@@ -423,8 +463,37 @@ export default function S1P10() {
 				from other plants?
 			</p>
 
-			<div className="grid grid-cols-1">
-				{/* TODO: Continue */}
+			<div className="flex flex-col gap-4">
+				{
+					[...nutrientDeficiencies.entries()].map(([element, x]) =>
+						<div key={ element } className="bg-emerald-50 border border-emerald-900 rounded-md flex flex-col md:flex-row px-4 py-4 gap-2 shadow-lg">
+							<div className="flex-none">
+								<Carousel
+									sx={{width:320, maxWidth: 320, borderRadius: "0.3rem", overflow: "clip" }}
+									mx="auto"
+									withIndicators
+									height={ 200 }
+									loop
+									plugins={[ autoplay.current ]}
+									onMouseEnter={ autoplay.current.stop }
+									onMouseLeave={ autoplay.current.reset }
+								>
+									{
+										x.images.map((image, i) => (
+											<Carousel.Slide key={ i }>
+												<img src={ image } alt="" className="w-full h-full object-cover" />
+											</Carousel.Slide>
+										))
+									}
+								</Carousel>
+							</div>
+							<div className="flex flex-col text-center md:text-left">
+								<p><strong>{ element }</strong></p>
+								<p className="text-sm">{ x.description }</p>
+							</div>
+						</div>
+					)
+				}
 			</div>
 		</main>
 	);
