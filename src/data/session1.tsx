@@ -3,6 +3,7 @@ import S1P10 from "@/pages/session1/S1P10"
 import S1P11 from "@/pages/session1/S1P11"
 import S1P12 from "@/pages/session1/S1P12"
 import S1P13 from "@/pages/session1/S1P13"
+import S1P14 from "@/pages/session1/S1P14"
 import S1P2 from "@/pages/session1/S1P2"
 import S1P3 from "@/pages/session1/S1P3"
 import S1P4 from "@/pages/session1/S1P4"
@@ -77,6 +78,11 @@ const session1 = [
         page: 13,
         title: "Infographic: Oil Palm Management",
         element: <S1P13 />
+    },
+    {
+        page: 14,
+        title: "For Future Teachers",
+        element: <S1P14 />
     },
 ]
 
