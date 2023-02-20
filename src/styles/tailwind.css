@@ -37,6 +37,10 @@ h1{
     .btn:disabled{
         @apply opacity-70;
     }
+
+    .link{
+        @apply text-blue-600 underline decoration-dotted;
+    }
 }
 
 @layer utilities{
