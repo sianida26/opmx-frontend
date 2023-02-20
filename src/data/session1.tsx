@@ -1,5 +1,6 @@
 import S1P1 from "@/pages/session1/S1P1"
 import S1P10 from "@/pages/session1/S1P10"
+import S1P11 from "@/pages/session1/S1P11"
 import S1P2 from "@/pages/session1/S1P2"
 import S1P3 from "@/pages/session1/S1P3"
 import S1P4 from "@/pages/session1/S1P4"
@@ -59,6 +60,11 @@ const session1 = [
         page: 10,
         title: "Fertiliser: More Harm than Good?",
         element: <S1P10 />
+    },
+    {
+        page: 11,
+        title: "What are weeds? 2 + 8 minute writing task",
+        element: <S1P11 />
     },
 ]
 
