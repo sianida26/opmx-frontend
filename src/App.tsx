@@ -8,6 +8,7 @@ import S1P3 from "./pages/session1/S1P3";
 import S1P4 from "./pages/session1/S1P4";
 import S1P5 from "./pages/session1/S1P5";
 import S1P6 from "./pages/session1/S1P6";
+import Session1Finish from "./pages/session1/Session1Finish";
 
 function App() {
 
@@ -30,8 +31,12 @@ function App() {
 				...session1.map(x => ({
 					path: `page${x.page}`,
 					element: x.element,
-				}))
+				})),
 			]
+		},
+		{
+			path: "/session1/finish",
+			element: <Session1Finish />,
 		}
 	], {
 		basename: import.meta.env.BASE_URL

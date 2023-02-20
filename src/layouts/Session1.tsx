@@ -71,7 +71,7 @@ export default function Session1() {
 			<Outlet />
 			{/* navigation */}
 			<div className="flex flex-col text-xs gap-4 md:flex-row md:justify-between w-full max-w-screen-lg mx-auto px-6 pb-4 poppins">
-				{currentPage > 1 && (
+				{currentPage > 1 ? (
 					<Link
 						className="btn-prev md:max-w-1/2 md:self-end md:flex-grow-0"
 						to={`./page${ currentPage - 1 }`}
@@ -82,10 +82,10 @@ export default function Session1() {
 							<p>{ session1.find(x => x.page === currentPage-1)?.title ?? "" }</p>
 						</div>
 					</Link>
-				)}
+				) : <span></span>}
 				<Link
 					className="btn-next md:max-w-1/2 md:self-end md:flex-grow-0"
-					to={`./page${ currentPage + 1 }`}
+					to={currentPage === session1.length ? './finish' : `./page${ currentPage + 1 }`}
 				>
 					<div className="flex flex-col">
 						<p className="font-bold">Next Page:</p>
