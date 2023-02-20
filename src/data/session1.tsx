@@ -1,6 +1,7 @@
 import S1P1 from "@/pages/session1/S1P1"
 import S1P10 from "@/pages/session1/S1P10"
 import S1P11 from "@/pages/session1/S1P11"
+import S1P12 from "@/pages/session1/S1P12"
 import S1P2 from "@/pages/session1/S1P2"
 import S1P3 from "@/pages/session1/S1P3"
 import S1P4 from "@/pages/session1/S1P4"
@@ -65,6 +66,11 @@ const session1 = [
         page: 11,
         title: "What are weeds? 2 + 8 minute writing task",
         element: <S1P11 />
+    },
+    {
+        page: 12,
+        title: "The Need for More Sustainable Oil Palm Management Practices?",
+        element: <S1P12 />
     },
 ]
 
