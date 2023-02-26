@@ -3,3 +3,9 @@ export interface IFrameTaskMessage<T> {
     action?: string,
     value: T,
 }
+
+export interface IRouteSession{
+    page: number,
+    title: string,
+    element: JSX.Element,
+}
